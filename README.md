@@ -1,7 +1,7 @@
 rtl8192du
 =========
 
-Source code for RTL8192DU device
+Source code for RTL8192DU device, forked from https://github.com/lwfinger/rtl8192du.git
 
 Install Instructions:
 # For Fedora
