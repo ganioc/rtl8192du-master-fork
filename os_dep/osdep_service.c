@@ -34,40 +34,40 @@
 
 #define RT_TAG	'1178'
 
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 11, 0))
-static inline ssize_t call_read_iter(struct file *file, struct kiocb *kio,
-				     struct iov_iter *iter)
-{
-	return file->f_op->read_iter(kio, iter);
-}
-#endif
+// #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 11, 0))
+// static inline ssize_t call_read_iter(struct file *file, struct kiocb *kio,
+// 				     struct iov_iter *iter)
+// {
+// 	return file->f_op->read_iter(kio, iter);
+// }
+// #endif
 
-static ssize_t new_sync_read(struct file *filp, void __user *buf, __kernel_size_t len, loff_t *ppos)
-{
-        struct iovec iov;
-        struct kiocb kiocb;
-        struct iov_iter iter;
-        ssize_t ret;
+// static ssize_t new_sync_read(struct file *filp, void __user *buf, __kernel_size_t len, loff_t *ppos)
+// {
+//         struct iovec iov;
+//         struct kiocb kiocb;
+//         struct iov_iter iter;
+//         ssize_t ret;
 
-	iov.iov_base = buf;
-	iov.iov_len = len;
-        init_sync_kiocb(&kiocb, filp);
-        kiocb.ki_pos = *ppos;
-        iov_iter_init(&iter, READ, &iov, 1, len);
+// 	iov.iov_base = buf;
+// 	iov.iov_len = len;
+//         init_sync_kiocb(&kiocb, filp);
+//         kiocb.ki_pos = *ppos;
+//         iov_iter_init(&iter, READ, &iov, 1, len);
 
-        ret = call_read_iter(filp, &kiocb, &iter);
-        BUG_ON(ret == -EIOCBQUEUED);
-        *ppos = kiocb.ki_pos;
-        return ret;
-}
+//         ret = call_read_iter(filp, &kiocb, &iter);
+//         BUG_ON(ret == -EIOCBQUEUED);
+//         *ppos = kiocb.ki_pos;
+//         return ret;
+// }
 
 static ssize_t __vfs_read_alt(struct file *file, char __user *buf, size_t count,
                    loff_t *pos)
 {
         if (file->f_op->read)
                 return file->f_op->read(file, buf, count, pos);
-        else if (file->f_op->read_iter)
-                return new_sync_read(file, (void *)buf, (__kernel_size_t)count, pos);
+        // else if (file->f_op->read_iter)
+        //         return new_sync_read(file, (void *)buf, (__kernel_size_t)count, pos);
         else
                 return -EINVAL;
 }

@@ -35,7 +35,7 @@ CONFIG_INTEL_WIDI = n
 CONFIG_WAKE_ON_WLAN = n
 CONFIG_ODM_ADAPTIVITY = n
 
-CONFIG_PLATFORM_I386_PC = y
+CONFIG_PLATFORM_I386_PC = n
 CONFIG_PLATFORM_TI_AM3517 = n
 CONFIG_PLATFORM_ANDROID_X86 = n
 CONFIG_PLATFORM_JB_X86 = n
@@ -68,6 +68,7 @@ CONFIG_PLATFORM_MSTAR_A3 = n
 CONFIG_PLATFORM_MSTAR = n
 CONFIG_PLATFORM_ARM_SUNxI = n
 CONFIG_PLATFORM_ARM_SUN6I = n
+CONFIG_PLATFORM_ARM_SUN8I = y
 CONFIG_PLATFORM_ARM_RTD299X = n
 CONFIG_PLATFORM_MSTAR_MSD8361 = n
 
@@ -531,8 +532,12 @@ ARCH := arm
 #CROSS_COMPILE := /home/android_sdk/Allwinner/a23/android-jb42/lichee/out/android/common/buildroot/external-toolchain/bin/arm-linux-gnueabi-
 #KSRC :=/home/android_sdk/Allwinner/a23/android-jb42/lichee/linux-3.4
 # ===Cross compile setting for Android 4.4 SDK ===
-CROSS_COMPILE := /home/android_sdk/Allwinner/a23/android-kk44/lichee/out/android/common/buildroot/external-toolchain/bin/arm-linux-gnueabi-
-KSRC :=/home/android_sdk/Allwinner/a23/android-kk44/lichee/linux-3.4
+# CROSS_COMPILE := /home/android_sdk/Allwinner/a23/android-kk44/lichee/out/android/common/buildroot/external-toolchain/bin/arm-linux-gnueabi-
+# KSRC :=/home/android_sdk/Allwinner/a23/android-kk44/lichee/linux-3.4
+CROSS_COMPILE := /home/yango/Documents/project/lichee/out/sun8iw7p1/dragonboard/common/buildroot/external-toolchain/bin/arm-linux-gnueabi-
+KSRC :=/home/yango/Documents/project/lichee/linux-3.4
+
+
 endif
 
 ifeq ($(CONFIG_PLATFORM_ARM_RTD299X), y)
